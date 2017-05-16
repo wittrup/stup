@@ -1,0 +1,32 @@
+### JetBrains template     =~=~=~=~=~=~=~=~=~=~=~=
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio
+
+*.iml
+
+## Directory-based project format:
+.idea/
+
+### Python template     =~=~=~=~=~=~=~=~=~=~=~=
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django stuff:
+*.log
+
+# Created by .ignore support plugin (hsz.mobi)
+
+### HTTrack template     =~=~=~=~=~=~=~=~=~=~=~=
+hts-in_progress.lock
+hts-cache/
+*/hts-cache/new.lst
+*/hts-cache/new.txt
+*/hts-cache/new.zip
+*/hts-cache/readme.txt
+*/hts-cache/winprofile.ini
+*.tmp
+
+
+###############################
+ignore
