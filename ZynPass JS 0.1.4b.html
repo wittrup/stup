@@ -1,0 +1,188 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>ZynPass JS 0.1.4b</title>
+<script type="text/javascript">
+   <!--
+    /*
+    ----------------------------------------------------------
+     Se permite la reproducción total o parcial de los 
+     contenidos de ésta página, así como el código fuente 
+     del programa en JavaScript, siempre y cuando se mencione 
+     la fuente y se notifique al autor. 
+     Tony Cool: tonycool (arroba) gmail (punto) com
+    ----------------------------------------------------------
+     */
+    
+    function calcularPass()
+    {
+      sem=document.conv.semilla.value
+      if (sem.length!=12)
+          {
+          alert("Seed must be 12 digits")
+          document.conv.semilla.focus()
+          }
+      else
+      {
+        var error=false
+        for (cuenta=0;cuenta<12;cuenta++)
+        {
+                  
+	if (sem.substr(cuenta,1)!="0" &&
+            sem.substr(cuenta,1)!="1" &&
+            sem.substr(cuenta,1)!="2" &&
+            sem.substr(cuenta,1)!="3" &&
+            sem.substr(cuenta,1)!="4" &&
+            sem.substr(cuenta,1)!="5" &&
+            sem.substr(cuenta,1)!="6" &&
+            sem.substr(cuenta,1)!="7" &&
+            sem.substr(cuenta,1)!="8" &&
+            sem.substr(cuenta,1)!="9" &&
+            sem.substr(cuenta,1).toUpperCase()!="A" &&
+            sem.substr(cuenta,1).toUpperCase()!="B" &&
+            sem.substr(cuenta,1).toUpperCase()!="C" &&
+            sem.substr(cuenta,1).toUpperCase()!="D" &&
+            sem.substr(cuenta,1).toUpperCase()!="E" &&
+            sem.substr(cuenta,1).toUpperCase()!="F" )
+	    {
+            error= true
+            cuenta=12
+            }
+        }
+      if (error)
+      {
+       alert ("Error, only numbers 0-9 and hex A-F letters allowed")
+      
+       document.conv.semilla.focus()
+       document.conv.semilla.select()
+      } 
+      else
+       {
+      
+      /* Algoritmo de Password para el método Parmenide
+               a = primeros 3 bytes de la semilla
+               b = a + 0x10F0A563 (0x significa hexadecimal)
+               c = (último byte de la semilla) AND 7 
+               password = (b ROR c) XOR a
+            
+      */
+      a=parseInt(sem.substr(0,6),16)
+      b= a + 0x10F0A563      
+      c=parseInt(sem.substr(10,2),16) & 7
+      bChar= b.toString(2)
+      while (bChar.length<32) bChar="0"+bChar
+      bChar2=bChar.substr(bChar.length-c,c)+bChar.substr(0,bChar.length-c)
+      b=parseInt(bChar2,2)
+           
+      document.conv.resultado.value = parseInt(XorBin(b.toString(2),a.toString(2)),2).toString(16).toUpperCase()
+      }
+    }
+    }
+    
+    function XorBin(a,b)
+    {
+     var resul=""
+    while (a.length<32) a="0"+a
+           
+    while (b.length<32) b="0"+b
+     
+    for (cuen=0;cuen<32;cuen++)
+         { 
+          if (a.substr(cuen,1)==b.substr(cuen,1))
+           resul=resul + "0"
+          else
+           resul=resul + "1"
+          }
+     return resul   
+    
+    }
+   //-->
+  </script>
+
+</head>
+<script type="text/javascript"><!--
+google_ad_client = "pub-3266531203610852";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_channel ="";
+google_color_border = "B4D0DC";
+google_color_bg = "ECF8FF";
+google_color_link = "0000CC";
+google_color_url = "008000";
+google_color_text = "6F6F6F";
+//--></script>
+<script type="text/javascript"
+  src="show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+
+<body BACKGROUND="BackZyxel.gif" tppabs="http://www.telefonica.net/web2/cooltony/zyxel/BackZyxel.gif">
+<table border="0" width="700" id="table4" height="400">
+	<tr>
+		<td>
+<form name="conv">
+<span lang="en-gb">
+<font face="Tahoma"><big><b>ZynPass JS v.0.1.4b </b></big></font>
+</span>
+					<p><span lang="en-gb"><font face="Tahoma">Password 
+					calculator for updating <b>ZyXEL&nbsp;Prestige 650HW-31(E) </b>&amp;<b> 
+					Prestige 660HW-61</b> <b>Router's firmware</b>, as stated in<i> Parmenide</i> 
+					and <i>Ceporro/civilis72 methods</i><br><br>JavaScript 
+					version by TonyCool</font></span></p>
+					<p><span lang="en-gb"><font face="Tahoma">Write seed and 
+					press the button to calculate it.</font></span></p>
+					<TABLE ALIGN="left" BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH="646" id="table5">
+						<TR ALIGN="left" VALIGN="middle">
+							<TD><span lang="en-gb"><font face="Tahoma">Seed:</font></span></TD>
+							<TD><span lang="en-gb"><font face="Tahoma">
+							<input name="semilla" type="text" size="13" maxlength="12">
+							<input type="button" onclick="calcularPass()" value="Calculate"></font></span></TD>
+							<TD width="268" rowspan="2"><b><span lang="en-gb"><font face="Tahoma">This 
+password generator also works for other ZyXEL Routers.</font></span></b></TD>
+							<TR ALIGN="left" VALIGN="middle">
+							<TD><span lang="en-gb"><font face="Tahoma">Password: </font>
+							</span></TD>
+							<TD><span lang="en-gb"><font face="Tahoma">
+							<input name="resultado" readonly="readonly" size="13">
+							</font></span></TD>
+							</TABLE><span lang="en-gb"><font face="Tahoma"><br><br><br>
+					&nbsp;</font></span><p><span lang="en-gb">
+<font face="Tahoma" size="2" color="#FF0000">If this program 
+has been useful for you, please click on any of the links on the top of the page. 
+It costs you nothing and it's a big help for me. Thanks!</font></span></p>
+<p>&nbsp;</td>
+	</tr>
+</table>
+<span lang="en-gb"><br>
+
+<!-- Begin Webstats4U code -->
+<!-- Title: ZynPass JS 0.1.4b -->
+<!-- URL: http://www.telefonica.net/web2/cooltony/zyxel/zynpass_en.htm -->
+<script language="JavaScript" type="text/javascript" src="m.js" tppabs="http://m1.webstats4u.com/m.js">
+</script>
+<script language="JavaScript" type="text/javascript">
+<!--
+ webstats4u("ADpEhA9FQ/NU0iOMXKCPlAcF9P8A", 0);
+// -->
+</script>
+<noscript>
+<a target="_blank" href="javascript:if(confirm('http://www.webstats4u.com/stats?ADpEhA9FQ/NU0iOMXKCPlAcF9P8A  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://www.webstats4u.com/stats?ADpEhA9FQ/NU0iOMXKCPlAcF9P8A'" tppabs="http://www.webstats4u.com/stats?ADpEhA9FQ/NU0iOMXKCPlAcF9P8A"><img
+src="n-id=ADpEhA9FQ-NU0iOMXKCPlAcF9P8A.gif" tppabs="http://m1.webstats4u.com/n?id=ADpEhA9FQ/NU0iOMXKCPlAcF9P8A"
+border="0" width="18" height="18"
+alt="Webstats4U - Web site statistics"></a><br>
+<a target="_blank" href="javascript:if(confirm('http://www.webstats4u.com/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://www.webstats4u.com/'" tppabs="http://www.webstats4u.com/">Free counter</a>
+</noscript>
+<!-- End Webstats4U code -->
+
+</span>
+
+</form>
+<p>&nbsp;</p>
+<p><span lang="en-gb"><b><font face="Tahoma">This page belongs to a pop up 
+window. Please follow <a href="zyxel_en.htm" tppabs="http://www.telefonica.net/web2/cooltony/zyxel/zyxel_en.htm">this link</a> to go to the main 
+page.</font></b></span></p>
+
+</body>
+
+</html>
