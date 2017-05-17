@@ -1,47 +1,78 @@
+<div style="background-color: #c8ccce; height: 28px; position:relative"><h3 style="display: inline-block;
+    top: -1px;
+    left: -2px;
+    box-shadow: 1px 1px 1px 1px #333;
+    background-color: #4096EE;
+    position: absolute;
+    margin: 0;
+    font-size: 12px !important;
+    line-height: 28px;
+    padding: 0px 16px;
+    font-weight: normal;
+text-transform:uppercase;
+    color: #ffffff;">PuTTY</h3></div>
+	<pre class="alt2 prettyprint linenums" dir="ltr" style="
+		margin: 0px;
+		padding: 6px;
+		text-align: left;
+		overflow: auto;
+		white-space: pre-wrap;
+		white-space: -moz-pre-wrap;
+		white-space: -pre-wrap;
+		white-space: -o-pre-wrap;
+		word-wrap: break-word; 
+word-break: break-all;
+background-color: #333; color: #fff;">CFE> ATHE
+Available commands:
 
-<html>
+ATSE                show the seed of password generator
+ATEN                set BootExtension Debug Flag
+ATCR                Clear console screen
+ATSH                dump manufacturer related data in ROM
+ATUR                xmodem upload router firmware to flash ROM
+FWSELECT            Select partition to read/write image or show FW version
+ATIR                Set ImageDefault to ROM-D partition
+ATER                Erase ROM-D partition
+ATBL                Print boot line and board parameter info
+ATDU                Dump memory or registers.
+ATBR                Reset to default Romfile
+ATGO                boot router
+ATSR                system reboot
+ATMB                Use for multiboot.
+ATHE                print help
 
-<head>
-<link rel=stylesheet href="style.css" type="text/css">
-<title>How to compute the password to unlock the protected debug-mode
-AT-commands of a Zyxel Prestige 941 Cable Modem/Router</title>
-</head>
+For more information about a command, enter 'help command-name'
+*** command status = 0
+CFE> ATSH
 
-<body>
+FW       Version       : 
+Bootbase Version       : 
+Vendor Name            :
+Product Model          : DSL-2492GNAU-B3BC
+Serial Number          : 
+WPA-PSK                : 
+First MAC Address      : 
+Last MAC Address       : 
+MAC Address Quantity   : 
+Default Country Code   : 
+Boot Module Debug Flag : 
+RootFS      Checksum   : 
+ImageDefaultChecksum   : 
+Main Feature Bits      : 
+Other Feature Bits     :
+                4d 53 60 0a 00 00 00 00-00 00 00 00 00 00 00 00
+                00 00 00 00 00 00 00 00-00 00 00 00 00 00
 
-<p><b><font size="3">How to compute the password to unlock the protected debug-mode AT-commands of
-a Zyxel Prestige 941 Cable Modem/Router</font></b></p>
-<p><b>Symtom: </b>Some of the debug-mode commands (boot commands) of the Zyxel
-P941 do not work.
-The response is always &quot;ERROR&quot;.</p>
-<p><b>Hardware:</b>  Zyxel Prestige 941 cable router.<br>
-Note: Some other Zyxel Prestige modems/routers (e.g. 642 and 650) use the same password
-algorithm.</p>
-<p><b>Software:</b> Zyxel-Firmware: Bootbase version V1.6.</p>
-<p><b>Cause:</b>  Some of the debug-mode AT-commands are protected and must be
-enabled using a randomly generated password.</p>
-<p><b>Solution:</b>  Use the &quot;ATSE&quot; command to display the seed of the password
-generator. Compute the password and enter the password with the command &quot;ATEN
-1,password&quot;. After that, &quot;ATHE&quot; (help) will include the protected
-commands in the list.</p>
-<p>The following formula can be used to compute the password:</p>
-<blockquote>
-  <p>a = first 3 bytes of seed value<br>
-  b = a + 0x10F0A563<br>
-  c = (last byte of seed value) AND 7<br>
-  password = (b ROR c)&nbsp; XOR a<br>
-  <br>
-  Note: ROR is a 32-bit rotate-right operation.</p>
-</blockquote>
-<p>I don't publish the source code or a program to compute the password, because the
-protected debug-mode AT commands of the Router should be used by experts only.</p>
+*** command status = 0
+CFE> ATSE DSL-2492GNAU-B3BC
 
-<p>Author: <a href="http://www.inventec.ch/chdh" target="_top">Christian d'Heureuse</a> (<a href="mailto:chdh@inventec.ch">chdh@inventec.ch</a>, <a href="http://www.source-code.biz" target="_top">www.source-code.biz</a>)<br>
-<a href="swhw_notes.htm">Index</a></p>
+000D4548B61F
+OK
+*** command status = 0
+CFE> ATEN 1 5021EC20
 
-<p>From <a href="http://www.inventec.ch/chdh/notes/5.htm">http://www.inventec.ch/chdh/notes/5.htm</a></p>
-
-
-</body>
-
-</html>
+OK
+*** command status = 0
+CFE>
+</pre>
+</div>
